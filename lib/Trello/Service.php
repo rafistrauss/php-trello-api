@@ -163,6 +163,12 @@ class Service extends Manager
             case Events::CARD_REMOVE_LABEL:
                 $event = new Event\CardEvent();
                 $event->setCard($this->getCard($data['card']['id']));
+                if ($data['listBefore']) {
+                    $event->setPreviousListName($data['listBefore']['name']);
+                }
+                if ($data['listAfter']) {
+                    $event->setNextListName($data['listAfter']['name']);
+                }
                 break;
             case Events::CARD_COPY:
                 $event = new Event\CardCopyEvent();
