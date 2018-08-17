@@ -12,6 +12,11 @@ abstract class AbstractEvent extends GenericEvent
     protected $requestData;
 
     /**
+     * @var array
+     */
+    protected $memberCreator;
+
+    /**
      * Set request data
      *
      * @param array $requestData
@@ -30,4 +35,26 @@ abstract class AbstractEvent extends GenericEvent
     {
         return $this->requestData;
     }
+
+    /**
+     * Set member creator
+     *
+     * @param array $memberCreator
+     */
+    public function setmemberCreator(array $memberCreator)
+    {
+        $this->memberCreator = $memberCreator;
+    }
+
+    /**
+     * Get member creator
+     *
+     * @return array
+     */
+    public function getmemberCreator()
+    {
+        return $this->memberCreator;
+    }
+
+
 }

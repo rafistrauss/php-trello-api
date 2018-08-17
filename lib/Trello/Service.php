@@ -107,8 +107,9 @@ class Service extends Manager
             throw new InvalidArgumentException('Unable to retrieve data from request.');
         }
 
-        $eventName = $action['type'];
-        $data      = $action['data'];
+        $eventName      = $action['type'];
+        $data           = $action['data'];
+        $memberCreator  = $action['memberCreator']; // User who actually performed the action
 
         switch ($eventName) {
             case Events::BOARD_CREATE:
@@ -163,6 +164,7 @@ class Service extends Manager
             case Events::CARD_REMOVE_LABEL:
                 $event = new Event\CardEvent();
                 $event->setCard($this->getCard($data['card']['id']));
+                $event->setmemberCreator($memberCreator);
                 if ($data['listBefore']) {
                     $event->setPreviousListName($data['listBefore']['name']);
                 }
@@ -185,6 +187,7 @@ class Service extends Manager
                 $event = new Event\CardCommentEvent();
                 $event->setCard($this->getCard($data['card']['id']));
                 $event->setComment($data['text']);
+                $event->setmemberCreator($memberCreator);
                 break;
             case Events::CARD_FROM_CHECKITEM:
                 $event = new Event\CardFromCheckItemEvent();
