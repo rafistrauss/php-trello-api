@@ -92,6 +92,9 @@ class Service extends Manager
         if (!$request) {
             $request = Request::createFromGlobals();
             $data = json_decode($request->getContent(), true);
+            if(!$data) {
+                $data = array();
+            }
             $request->request->replace($data);
         }
 
